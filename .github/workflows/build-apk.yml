@@ -23,15 +23,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-                - name: Extract project ZIP
+      - name: Extract project ZIP
         run: |
           mkdir project
           unzip -o FreeFireAIManager-Android-Source.zip -d project
-      - name: Install Gradle
-        run: |
-          wget -q https://services.gradle.org/distributions/gradle-8.9-bin.zip
-          unzip -q gradle-8.9-bin.zip
-          echo "$PWD/gradle-8.9/bin" >> "$GITHUB_PATH"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Build APK
         run: gradle -p project assembleDebug
